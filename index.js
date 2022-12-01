@@ -18,7 +18,7 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
 
-    //tie condition
+    //tie condition1177917
     if(playerSelection == computerSelection){
         return "It's a tie!"
     }
@@ -41,7 +41,21 @@ function game() {
     }
 }
 
-
-const playerSelection = prompt("Rock, Paper, or Scissors?");
+const btnRock = document.querySelector('#rock');
+const btnPaper = document.querySelector('#paper');
+const btnScissors = document.querySelector('#scissors');
+//const playerSelection = prompt("Rock, Paper, or Scissors?");
 const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+//console.log(playRound(playerSelection, computerSelection));
+
+btnRock.addEventListener('click', () => {
+    console.log(playRound(btnRock.value, computerSelection));
+});
+
+btnPaper.addEventListener('click', () => {
+    console.log(playRound(btnPaper.value, computerSelection));
+});
+
+btnScissors.addEventListener('click', () => {
+    console.log(playRound(btnScissors.value, computerSelection));
+});
