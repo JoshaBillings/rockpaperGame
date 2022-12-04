@@ -11,51 +11,56 @@ let getComputerChoice = () => {
 
 console.log(getComputerChoice());
 
-
+//player and computers score
+let pNum = 0;
+let cNum = 0;
 
 //Play a round
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
-
-    //tie condition1177917
+    if(pNum == 5 || cNum == 5){
+        pNum = 0;
+        cNum = 0;
+    }
+    //tie condition
     if(playerSelection == computerSelection){
+        pNum++;
+        cNum++;
         return "It's a tie!"
     }
     //Win condition
     if(playerSelection == "paper" && computerSelection == "rock" || playerSelection == "rock" && computerSelection == "scissors" || playerSelection == "scissors" && computerSelection == "paper"){
-        return "You won! " + playerSelection + " beats " + computerSelection; 
+        pNum++;
+        return "You won! " + playerSelection + " beats " + computerSelection;
             }
 
     //Lose Condition
     if(playerSelection == "rock" && computerSelection == "paper" || playerSelection == "scissors" && computerSelection == "rock" || playerSelection == "paper" && computerSelection == "scissors"){
+        cNum++;
         return "You lost! " + computerSelection + " beats " + playerSelection;
     }
 
 }
 
-//Game function
-function game() {
-    for(let i = 0; i < 5; i++){
 
-    }
-}
+
 
 const btnRock = document.querySelector('#rock');
 const btnPaper = document.querySelector('#paper');
+const result = document.querySelector('#results');
 const btnScissors = document.querySelector('#scissors');
-//const playerSelection = prompt("Rock, Paper, or Scissors?");
 const computerSelection = getComputerChoice();
-//console.log(playRound(playerSelection, computerSelection));
+const pScore = document.querySelector('#Pscore');
+const cScore = document.querySelector('#Cscore');
 
-btnRock.addEventListener('click', () => {
-    console.log(playRound(btnRock.value, computerSelection));
-});
+const btns = document.querySelectorAll('button');
 
-btnPaper.addEventListener('click', () => {
-    console.log(playRound(btnPaper.value, computerSelection));
-});
-
-btnScissors.addEventListener('click', () => {
-    console.log(playRound(btnScissors.value, computerSelection));
+btns.forEach((button) => {
+    button.addEventListener('click', () => {
+        result.textContent = playRound(button.value, computerSelection);
+        console.log(button.value);
+        pScore.textContent = "Player : " + pNum;
+        cScore.textContent = "Computer Score: " + cNum;
+    });
 });
